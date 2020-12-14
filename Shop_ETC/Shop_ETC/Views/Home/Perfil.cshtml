@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Shop_ETC.Models.Perfil_Result>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalles</title>
+    @Styles.Render("~/Content/css")
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" />
+                            <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                        </svg>
+                        <i>@Html.ActionLink("Home", "Index", "Home")</i><br />
+                        <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi - cart4' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z' /></svg>
+                        <i>@Html.ActionLink("Carrito", "Carrito", "Home")</i><br />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                            <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                        </svg><i>@Html.ActionLink("Cerrar Sesion", "About", "Home")</i><br />
+
+                    </div>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mantenimiento
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <i>@Html.ActionLink("Usuarios", "User", "Usuarios")</i><br />
+                            <i>@Html.ActionLink("Productos", "Index", "Productos")</i><br />
+                            <i>@Html.ActionLink("Productos Reservados", "Index", "Detalle_venta")</i><br />
+                            <i>@Html.ActionLink("Categorias", "Index", "Categorias")</i><br />
+
+                        </div>
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <p style="color:#fff; font-family:Arial">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                        </svg>
+                        @ViewBag.Nombre
+                    </p>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div>
+        @foreach (var item in Model)
+        {
+            <div align="center" class="form-group">
+                <header>
+                    <img src="data:image/png;base64,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" />
+                </header>
+                <label style="color:#040b26">Nombre: </label>
+                @Html.DisplayFor(modelItem => item.NombresUsuario)<br />
+                <label style="color:#040b26">Usuario: </label>
+                @Html.DisplayFor(modelItem => item.Nickusuario)<br />
+                <label style="color:#040b26">Genero: </label>
+                @Html.DisplayFor(modelItem => item.Genero)<br />
+                <label style="color:#040b26">Fecha_Cumpleaños: </label>
+                @Html.DisplayFor(modelItem => item.Fecha_nacimiento)<br />
+                <label style="color:#040b26">Dirección: </label>
+                @Html.DisplayFor(modelItem => item.Direccion)<br />
+                <label style="color:#040b26">email: </label>
+                @Html.DisplayFor(modelItem => item.email)<br />
+                <label style="color:#040b26">Telefono: </label>
+                @Html.DisplayFor(modelItem => item.Telefono)<br />
+                <div >
+                    <input type="submit" value="Modificar"  class="btn btn-success"/>
+                </div>
+                <br />
+            </div>
+
+        }
+    </div>
+
+
+    <br />
+    <br />
+    <div class="Foot">
+        <div>
+            <i style="color:#000;">@Html.ActionLink("Registrate!", "Registrar", "Acceso")</i>
+        </div>
+        <div>
+            <ul><li style="color:#fff;"><i style="color:#000;">Ivan Alessandro Mendoza Landaverde</i></li></ul>
+            <ul><li style="color:#fff;"><i style="color:#000;">Elias Jesús Quinteros Escobar</i></listyle="color:#fff;"></ul>
+
+        </div>
+        <div>
+
+        </div>
+        <div>
+            ™© Copyrigth -- @DateTime.Now.Year Mi aplicacion---Shop_ETC
+            <marquee class="pro"> Contactanos al 22-7787-29 </marquee>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>

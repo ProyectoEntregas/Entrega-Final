@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SITIOWEBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="Idcategoria" />
+    </Key>
+    <Property Name="Idcategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCate" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Compras">
+    <Key>
+      <PropertyRef Name="Idcompra" />
+    </Key>
+    <Property Name="Idcompra" Type="int" Nullable="false" />
+    <Property Name="numfactura" Type="int" />
+    <Property Name="Idusuario" Type="int" />
+    <Property Name="Feha_compra" Type="date" />
+    <Property Name="Fecha_envio" Type="date" />
+    <Property Name="Idproveedor" Type="int" />
+    <Property Name="Totalcompra" Type="smallmoney" />
+    <Property Name="Fecha_pago" Type="date" />
+  </EntityType>
+  <EntityType Name="Detalle_venta">
+    <Key>
+      <PropertyRef Name="idVenta" />
+    </Key>
+    <Property Name="idVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreProducto" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="cantidad" Type="int" />
+    <Property Name="precio" Type="money" />
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="idUser" Type="int" />
+  </EntityType>
+  <EntityType Name="Envios">
+    <Key>
+      <PropertyRef Name="Idenvio" />
+    </Key>
+    <Property Name="Idenvio" Type="int" Nullable="false" />
+    <Property Name="Compania" Type="varchar" MaxLength="100" />
+    <Property Name="Telefono" Type="nchar" MaxLength="9" />
+  </EntityType>
+  <EntityType Name="Pagos">
+    <Key>
+      <PropertyRef Name="Idpago" />
+    </Key>
+    <Property Name="Idpago" Type="int" Nullable="false" />
+    <Property Name="Tipo_pago" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="Idproducto" />
+    </Key>
+    <Property Name="Idproducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProducto" Type="varchar" MaxLength="100" />
+    <Property Name="Precio_venta" Type="smallmoney" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="Imagen" Type="nvarchar(max)" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="15" />
+    <Property Name="Idproveedor" Type="int" />
+    <Property Name="Idcategoria" Type="int" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="Idproveedor" />
+    </Key>
+    <Property Name="Idproveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProveedor" Type="varchar" MaxLength="200" />
+    <Property Name="Compania" Type="varchar" MaxLength="200" />
+    <Property Name="Direccion" Type="varchar" MaxLength="200" />
+    <Property Name="email" Type="varchar" MaxLength="75" />
+    <Property Name="Telefono" Type="nchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="idTipo" />
+    </Key>
+    <Property Name="idTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoUsuario" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Idusuario" />
+    </Key>
+    <Property Name="Idusuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombresUsuario" Type="varchar" MaxLength="200" />
+    <Property Name="Nickusuario" Type="varchar" MaxLength="200" />
+    <Property Name="Fecha_nacimiento" Type="date" />
+    <Property Name="Genero" Type="char" MaxLength="1" />
+    <Property Name="email" Type="varchar" MaxLength="75" />
+    <Property Name="Direccion" Type="varchar" MaxLength="200" />
+    <Property Name="Telefono" Type="nchar" MaxLength="9" />
+    <Property Name="Contra" Type="varchar" MaxLength="20" />
+    <Property Name="idTipo" Type="int" />
+  </EntityType>
+  <EntityType Name="Ventas">
+    <Key>
+      <PropertyRef Name="Idventa" />
+    </Key>
+    <Property Name="Idventa" Type="int" Nullable="false" />
+    <Property Name="Numfactura" Type="int" />
+    <Property Name="Idusuario" Type="int" />
+    <Property Name="Feha_venta" Type="date" />
+    <Property Name="Fecha_envio" Type="date" />
+    <Property Name="Idenvio" Type="int" />
+    <Property Name="Idpago" Type="int" />
+    <Property Name="Idproveedor" Type="int" />
+    <Property Name="Total" Type="smallmoney" />
+    <Property Name="Fecha_pago" Type="date" />
+  </EntityType>
+  <Association Name="FK__Compras__Idprove__286302EC">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Idproveedor" />
+      </Principal>
+      <Dependent Role="Compras">
+        <PropertyRef Name="Idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Compras__Idusuar__276EDEB3">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Idusuario" />
+      </Principal>
+      <Dependent Role="Compras">
+        <PropertyRef Name="Idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productos__Idcat__1BFD2C07">
+    <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorias">
+        <PropertyRef Name="Idcategoria" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="Idcategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Productos__Idpro__1B0907CE">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Idproveedor" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="Idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ventas__Idenvio__267ABA7A">
+    <End Role="Envios" Type="Self.Envios" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Envios">
+        <PropertyRef Name="Idenvio" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="Idenvio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ventas__Idpago__276EDEB3">
+    <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pagos">
+        <PropertyRef Name="Idpago" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="Idpago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ventas__Idprovee__21B6055D">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Idproveedor" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="Idproveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ventas__Idusuari__1ED998B2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Idusuario" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="Idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_idTipo">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="idTipo" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="idTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="actualizarcarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cant" Type="int" Mode="In" />
+    <Parameter Name="idv" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ActualizarStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="numer" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Buscador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BusPro" Type="varchar" Mode="In" />
+    <Parameter Name="BusCat" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="BuscadorMejorado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BusPro" Type="varchar" Mode="In" />
+    <Parameter Name="BusCat" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Carrito1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="deletecarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idv" Type="int" Mode="In" />
+  </Function>
+  <Function Name="detalleCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsi" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarActualizarStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="u" Type="varchar" Mode="In" />
+    <Parameter Name="cant" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarActualizarStocksuma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="u" Type="varchar" Mode="In" />
+    <Parameter Name="cant" Type="int" Mode="In" />
+  </Function>
+  <Function Name="inicioSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nom_user" Type="nvarchar" Mode="In" />
+    <Parameter Name="pass" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="MontoTotalPagar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUs" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Perfil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Quin" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Registrar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nom" Type="varchar" Mode="In" />
+    <Parameter Name="Nick" Type="varchar" Mode="In" />
+    <Parameter Name="FN" Type="date" Mode="In" />
+    <Parameter Name="ge" Type="char" Mode="In" />
+    <Parameter Name="em" Type="varchar" Mode="In" />
+    <Parameter Name="Dire" Type="varchar" Mode="In" />
+    <Parameter Name="Tel" Type="nchar" Mode="In" />
+    <Parameter Name="c" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RegistrarNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nom" Type="varchar" Mode="In" />
+    <Parameter Name="Nick" Type="varchar" Mode="In" />
+    <Parameter Name="FN" Type="date" Mode="In" />
+    <Parameter Name="ge" Type="char" Mode="In" />
+    <Parameter Name="em" Type="varchar" Mode="In" />
+    <Parameter Name="Dire" Type="varchar" Mode="In" />
+    <Parameter Name="Tel" Type="nchar" Mode="In" />
+    <Parameter Name="c" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="seleccionar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="selecciondeProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nom" Type="varchar" Mode="In" />
+    <Parameter Name="cant" Type="int" Mode="In" />
+    <Parameter Name="Pr" Type="money" Mode="In" />
+    <Parameter Name="desc" Type="varchar(max)" Mode="In" />
+    <Parameter Name="idu" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="SITIOWEBModelStoreContainer">
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Compras" EntityType="Self.Compras" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_venta" EntityType="Self.Detalle_venta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Envios" EntityType="Self.Envios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Compras__Idprove__286302EC" Association="Self.FK__Compras__Idprove__286302EC">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Compras" EntitySet="Compras" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Compras__Idusuar__276EDEB3" Association="Self.FK__Compras__Idusuar__276EDEB3">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Compras" EntitySet="Compras" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productos__Idcat__1BFD2C07" Association="Self.FK__Productos__Idcat__1BFD2C07">
+      <End Role="Categorias" EntitySet="Categorias" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Productos__Idpro__1B0907CE" Association="Self.FK__Productos__Idpro__1B0907CE">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ventas__Idenvio__267ABA7A" Association="Self.FK__Ventas__Idenvio__267ABA7A">
+      <End Role="Envios" EntitySet="Envios" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ventas__Idpago__276EDEB3" Association="Self.FK__Ventas__Idpago__276EDEB3">
+      <End Role="Pagos" EntitySet="Pagos" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ventas__Idprovee__21B6055D" Association="Self.FK__Ventas__Idprovee__21B6055D">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ventas__Idusuari__1ED998B2" Association="Self.FK__Ventas__Idusuari__1ED998B2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_idTipo" Association="Self.fk_idTipo">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Shop_ETC.Models.BuscadorMejorado_Result>
+@{
+    ViewBag.Title = "BuscardorCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center;">
+    <h3><i>Busqueda</i></h3>
+</div>
+<div style="background:#c8c5c5">
+
+    <div class="baddy">
+        <div class="wrap">
+            <h1 style="color:#494B4D; font-weight:400;  display:flex;  flex-direction:column;   text-align:center; margin:15px 0px;">Escoge un producto</h1>
+            <div class="store-wrapper" style="display:flex;">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" width="150px">
+                        <div class="category_list" style="display:flex;  flex-direction:column; ">
+                            <a href="#" class="category_item" category="all">Todo</a>
+                            <a href="#" class="category_item" category="ordenadores">Ordenadores</a>
+                            <a href="#" class="category_item" category="Hogar">Hogar</a>
+                            <a href="#" class="category_item" category="Cocina">Cocina</a>
+                            <a href="#" class="category_item" category="Entretenimiento">Entretenimiento</a>
+                            <a href="#" class="category_item" category="Sonido">Sonido</a>
+                        </div>
+                    </div>
+                </div>
+                <section class="products-list">
+                    @foreach (var item in Model)
+                    {
+                        
+                            <div class="products-item" category="ordenadores">
+                                <img Height="167" src="~/IMG/@Html.DisplayFor(modelItem => item.Imagen)" BorderStyle="Dotted" Width="240px" />
+                                <a href="">
+                                    @Html.DisplayFor(modelItem => item.NombreProducto)<br />
+                                    @Html.DisplayFor(modelItem => item.Precio_venta)<br />
+                                    @Html.DisplayFor(modelItem => item.Descripcion)<br />
+                                    @Html.DisplayFor(modelItem => item.Cantidad)<br />
+                                </a>
+                                <div style="background:#000000">
+                                    @Html.ActionLink("Agregar a Carrito", "CarritoCliente2", new { NombresProducto = item.NombreProducto })
+                                </div>
+                                 </div>
+                        
+                    }
+                </section>
+
+            </div>
+        </div>
+    </div>  <br />
+</div>
+
+
+
+
+

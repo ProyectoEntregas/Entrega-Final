@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8eff8d2be5b444c9bc000b17659f049a" Name="Diagram1">
+        <EntityTypeShape EntityType="SITIOWEBModel.Categorias" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Compras" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Detalle_venta" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Envios" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Pagos" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Productos" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Proveedor" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.TipoUsuario" Width="1.5" PointX="1.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Usuario" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="SITIOWEBModel.Ventas" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Productos__Idcat__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Compras__Idprove__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Compras__Idusuar__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idenvio__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idpago__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Productos__Idpro__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idprovee__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.fk_idTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idusuari__1ED998B2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
