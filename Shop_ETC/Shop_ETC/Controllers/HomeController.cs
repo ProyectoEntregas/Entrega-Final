@@ -528,21 +528,29 @@ namespace Shop_ETC.Controllers
 
         public ActionResult Imprimir()
         {
-            decimal? v;
-            ViewBag.Nombre = Session["user"];
-            ob.Nombre = Session["user"].ToString();
-            ob.var1 = (from h in db.Usuario
-                       where h.Nickusuario == ob.Nombre.Trim()
-                       select h.Idusuario).FirstOrDefault();
-            var facpd= db.facpdf(ob.var1);
-            v = (from gh in db.VentasRealizadas
-                where gh.idcomprador == ob.var1
-                 select gh.MontoTotal).Sum();
-            ViewBag.toalpaga = v;
-            return View(facpd.ToList());
+            try
+            {
+                ViewBag.Nombre = Session["user"];
+                ob.Nombre = Session["user"].ToString();
+                ob.var1 = (from h in db.Usuario
+                           where h.Nickusuario == ob.Nombre.Trim()
+                           select h.Idusuario).FirstOrDefault();
+                var facpd =  db.facpdf(ob.var1);
+                ob.v = (from gh in db.VentasRealizadas
+                        where gh.idcomprador == ob.var1
+                        select gh.MontoTotal).Sum();
+                ViewBag.toalpaga = ob.v;
+                return View(facpd.ToList());
+            }
+            catch(Exception ex)
+            {
+                return Content("Error"+ex.Message);
+            }
+            
         }
         public ActionResult PDF()
         {
+            
             var prt =new ActionAsPdf("Imprimir");
             return prt;
         }

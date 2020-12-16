@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Shop_ETC.Models.facpdf_Result>
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -91,7 +91,7 @@
             </div>
             <div class="detalle">
                 <p>Numero de orden: <span>00001</span></p>
-                <p>A nombre de: <span>ViewBag.Nombre</span></p>
+                <p>A nombre de: <span>@ViewBag.Nombre</span></p>
                 <p>Fecha de realizacion: <span> @DateTime.Now </span></p>
             </div>
             <hr>
@@ -141,7 +141,7 @@
         </div>
     </div>
     <div> 
-            @Html.ActionLink("Facturar", "PDF") |
+            
         </div><br /><br /><br /><br /><br /><br /><br /><br /><br />
   
 </body>

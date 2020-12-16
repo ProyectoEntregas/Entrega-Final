@@ -7,6 +7,7 @@ namespace Shop_ETC.Models
 {
     public class Variables
     {
+        public decimal? v;
         public double Cont;
         public string Nombre;
         public string Nom;
