@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Shop_ETC.Models.facpdf_Result>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Imprimir</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .containeer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .factura {
+        border: 1px solid #000;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+        width: 60%;
+        padding: 15px;
+    }
+
+    .relleno {
+        width: 100%;
+        min-height: 20px;
+        background: rgb(12, 123, 143);
+        margin-bottom: 1em;
+    }
+
+    hr {
+        margin: 15px 0;
+        padding: 0.8px;
+        background: #000;
+    }
+
+    h2 {
+        font-weight: inherit;
+        color: rgb(1, 1, 158);
+    }
+
+    h3 {
+        font-weight: inherit;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        text-align: center;
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    th {
+        border-top: 1px solid rgb(255,0,0);
+        border-bottom: 1px solid rgba(255,0,0);
+    }
+
+    .total {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        margin: 15px 0;
+        padding: 10px;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+</style>
+<body>
+    <br />
+    <br />
+    <div class="containeer">
+        <div class="factura">
+            <div class="relleno"></div>
+            <div class="encabezado">
+                <h2>SHOP ETC</h2>
+                <h3 style="margin-bottom:.3em;">La mejor tienda en linea</h3>
+            </div>
+            <div class="detalle">
+                <p>Numero de orden: <span>00001</span></p>
+                <p>A nombre de: <span>ViewBag.Nombre</span></p>
+                <p>Fecha de realizacion: <span> @DateTime.Now </span></p>
+            </div>
+            <hr>
+            <div class="productos">
+                <h3 style="color: rgb(1,1,158);">Productos comprados</h3>
+                <table>
+                    <thead>
+                    <th>
+                        Descripcion
+                    </th>
+                    
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Monto
+                    </th>
+                    </thead>
+                    <tbody>
+@foreach (var item in Model)
+{
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </td>                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MontoTotal)
+                            </td>
+                        </tr>
+}
+                    </tbody>
+                </table>
+            </div>
+            <div class="total">
+                <h3 style="color: rgb(1,1,158);">TOTAL DE COMPRA</h3>
+                <span>@ViewBag.toalpaga $</span>
+            </div>
+            <div class="piefactura">
+                <p>Telefono: <span>5896-4751</span></p>
+                <p>Correo de contacto: <span>ShopETC@mail.com</span></p>
+                <p>Todos los derechos reservados</p>
+                <h3 style="color: rgb(1,1,158); text-align: center">GRACIAS POR SU COMPRA</h3>
+            </div>
+        </div>
+    </div>
+    <div> 
+            @Html.ActionLink("Facturar", "PDF") |
+        </div><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  
+</body>
+</html>

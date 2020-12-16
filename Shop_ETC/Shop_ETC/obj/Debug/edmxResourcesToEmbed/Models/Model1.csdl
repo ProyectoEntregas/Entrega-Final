@@ -107,6 +107,7 @@
     <NavigationProperty Name="Compras" Relationship="Self.FK__Compras__Idusuar__276EDEB3" FromRole="Usuario" ToRole="Compras" />
     <NavigationProperty Name="TipoUsuario" Relationship="Self.fk_idTipo" FromRole="Usuario" ToRole="TipoUsuario" />
     <NavigationProperty Name="Ventas" Relationship="Self.FK__Ventas__Idusuari__1ED998B2" FromRole="Usuario" ToRole="Ventas" />
+    <NavigationProperty Name="VentasRealizadas" Relationship="SITIOWEBModel.fk_idcomprador" FromRole="Usuario" ToRole="VentasRealizadas" />
   </EntityType>
   <EntityType Name="Ventas">
     <Key>
@@ -371,6 +372,44 @@
       <Parameter Name="c" Mode="In" Type="String" />
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="UpdateUsuario">
+      <Parameter Name="ren" Mode="In" Type="String" />
+      <Parameter Name="nu" Mode="In" Type="String" />
+      <Parameter Name="nk" Mode="In" Type="String" />
+      <Parameter Name="fcn" Mode="In" Type="DateTime" />
+      <Parameter Name="gnr" Mode="In" Type="String" />
+      <Parameter Name="emal" Mode="In" Type="String" />
+      <Parameter Name="Drc" Mode="In" Type="String" />
+      <Parameter Name="Telf" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Final">
+      <Parameter Name="descr" Mode="In" Type="String" />
+      <Parameter Name="nameus" Mode="In" Type="String" />
+      <Parameter Name="mot" Mode="In" Type="Decimal" />
+      <Parameter Name="isd" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="agrp" ReturnType="Collection(String)">
+      <Parameter Name="idva" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="VentasRealizadas" EntityType="SITIOWEBModel.VentasRealizadas" />
+    <AssociationSet Name="fk_idcomprador" Association="SITIOWEBModel.fk_idcomprador">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="VentasRealizadas" EntitySet="VentasRealizadas" />
+    </AssociationSet>
+    <FunctionImport Name="facturar">
+      <Parameter Name="desc" Mode="In" Type="String" />
+      <Parameter Name="f" Mode="In" Type="DateTime" />
+      <Parameter Name="ctn" Mode="In" Type="String" />
+      <Parameter Name="MT" Mode="In" Type="Decimal" />
+      <Parameter Name="idcpr" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="miCarroalcomprar">
+      <Parameter Name="isd" Mode="In" Type="Int32" />
+      <Parameter Name="npt" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="facpdf" ReturnType="Collection(SITIOWEBModel.facpdf_Result)">
+      <Parameter Name="di" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Carrito_Result">
     <Property Type="String" Name="Nickusuario" Nullable="true" MaxLength="200" />
@@ -445,5 +484,36 @@
     <Property Type="String" Name="email" Nullable="true" MaxLength="75" />
     <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+  </ComplexType>
+  <EntityType Name="VentasRealizadas">
+    <Key>
+      <PropertyRef Name="idVenta" />
+    </Key>
+    <Property Name="idVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="idcomprador" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="SITIOWEBModel.fk_idcomprador" FromRole="VentasRealizadas" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="fk_idcomprador">
+    <End Type="SITIOWEBModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="SITIOWEBModel.VentasRealizadas" Role="VentasRealizadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Idusuario" />
+      </Principal>
+      <Dependent Role="VentasRealizadas">
+        <PropertyRef Name="idcomprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="facpdf_Result">
+    <Property Type="Int32" Name="idVenta" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="1000" />
+    <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="MontoTotal" Nullable="true" Precision="19" />
   </ComplexType>
 </Schema>

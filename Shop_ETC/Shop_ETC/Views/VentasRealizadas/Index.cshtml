@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Shop_ETC.Models.VentasRealizadas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.NombresUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontoTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.NombresUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idVenta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idVenta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idVenta })
+        </td>
+    </tr>
+}
+
+</table>

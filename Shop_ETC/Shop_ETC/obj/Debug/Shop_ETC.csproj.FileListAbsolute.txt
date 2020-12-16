@@ -62,3 +62,5 @@ c:\users\elias\documents\visual studio 2015\Projects\Shop_ETC\Shop_ETC\bin\es\Sy
 c:\users\elias\documents\visual studio 2015\Projects\Shop_ETC\Shop_ETC\obj\Debug\Shop_ETC.dll
 c:\users\elias\documents\visual studio 2015\Projects\Shop_ETC\Shop_ETC\obj\Debug\Shop_ETC.pdb
 C:\Users\Elias\Documents\Visual Studio 2015\Projects\Shop_ETC\Shop_ETC\obj\Debug\Shop_ETC.csprojResolveAssemblyReference.cache
+C:\Users\Elias\Documents\Visual Studio 2015\Projects\Shop_ETC\Shop_ETC\bin\Rotativa.Core.dll
+C:\Users\Elias\Documents\Visual Studio 2015\Projects\Shop_ETC\Shop_ETC\bin\Rotativa.MVC.dll

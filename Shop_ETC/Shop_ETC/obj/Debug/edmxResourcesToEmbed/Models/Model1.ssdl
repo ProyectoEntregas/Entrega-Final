@@ -109,6 +109,19 @@
     <Property Name="Total" Type="smallmoney" />
     <Property Name="Fecha_pago" Type="date" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VentasRealizadas">
+    <Key>
+      <PropertyRef Name="idVenta" />
+    </Key>
+    <Property Name="idVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" />
+    <Property Name="MontoTotal" Type="money" />
+    <Property Name="idcomprador" Type="int" />
+  </EntityType>
   <Association Name="FK__Compras__Idprove__286302EC">
     <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
     <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
@@ -205,6 +218,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_idcomprador">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="VentasRealizadas" Type="Self.VentasRealizadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Idusuario" />
+      </Principal>
+      <Dependent Role="VentasRealizadas">
+        <PropertyRef Name="idcomprador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_idTipo">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -249,9 +274,23 @@
     <Parameter Name="u" Type="varchar" Mode="In" />
     <Parameter Name="cant" Type="int" Mode="In" />
   </Function>
+  <Function Name="facpdf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="di" Type="int" Mode="In" />
+  </Function>
+  <Function Name="facturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="desc" Type="varchar" Mode="In" />
+    <Parameter Name="f" Type="datetime" Mode="In" />
+    <Parameter Name="ctn" Type="varchar" Mode="In" />
+    <Parameter Name="MT" Type="money" Mode="In" />
+    <Parameter Name="idcpr" Type="int" Mode="In" />
+  </Function>
   <Function Name="inicioSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="nom_user" Type="nvarchar" Mode="In" />
     <Parameter Name="pass" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="miCarroalcomprar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isd" Type="int" Mode="In" />
+    <Parameter Name="npt" Type="varchar" Mode="In" />
   </Function>
   <Function Name="MontoTotalPagar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idUs" Type="int" Mode="In" />
@@ -287,6 +326,16 @@
   <Function Name="selecciondeProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ren" Type="varchar" Mode="In" />
+    <Parameter Name="nu" Type="varchar" Mode="In" />
+    <Parameter Name="nk" Type="varchar" Mode="In" />
+    <Parameter Name="fcn" Type="date" Mode="In" />
+    <Parameter Name="gnr" Type="char" Mode="In" />
+    <Parameter Name="emal" Type="varchar" Mode="In" />
+    <Parameter Name="Drc" Type="varchar" Mode="In" />
+    <Parameter Name="Telf" Type="nchar" Mode="In" />
+  </Function>
   <Function Name="UpVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="nom" Type="varchar" Mode="In" />
     <Parameter Name="cant" Type="int" Mode="In" />
@@ -305,6 +354,16 @@
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VentasRealizadas" EntityType="Self.VentasRealizadas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VentasRealizadas].[idVenta] AS [idVenta], 
+    [VentasRealizadas].[Descripcion] AS [Descripcion], 
+    [VentasRealizadas].[Fecha] AS [Fecha], 
+    [VentasRealizadas].[Estado] AS [Estado], 
+    [VentasRealizadas].[MontoTotal] AS [MontoTotal], 
+    [VentasRealizadas].[idcomprador] AS [idcomprador]
+    FROM [dbo].[VentasRealizadas] AS [VentasRealizadas]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__Compras__Idprove__286302EC" Association="Self.FK__Compras__Idprove__286302EC">
       <End Role="Proveedor" EntitySet="Proveedor" />
       <End Role="Compras" EntitySet="Compras" />
@@ -336,6 +395,10 @@
     <AssociationSet Name="FK__Ventas__Idusuari__1ED998B2" Association="Self.FK__Ventas__Idusuari__1ED998B2">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_idcomprador" Association="Self.fk_idcomprador">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="VentasRealizadas" EntitySet="VentasRealizadas" />
     </AssociationSet>
     <AssociationSet Name="fk_idTipo" Association="Self.fk_idTipo">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />

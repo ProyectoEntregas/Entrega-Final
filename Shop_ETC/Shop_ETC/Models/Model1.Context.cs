@@ -37,6 +37,7 @@ namespace Shop_ETC.Models
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Ventas> Ventas { get; set; }
+        public virtual DbSet<VentasRealizadas> VentasRealizadas { get; set; }
     
         public virtual ObjectResult<Carrito_Result> Carrito(string user)
         {
@@ -329,6 +330,120 @@ namespace Shop_ETC.Models
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarNew", nomParameter, nickParameter, fNParameter, geParameter, emParameter, direParameter, telParameter, cParameter, idParameter);
+        }
+    
+        public virtual int UpdateUsuario(string ren, string nu, string nk, Nullable<System.DateTime> fcn, string gnr, string emal, string drc, string telf)
+        {
+            var renParameter = ren != null ?
+                new ObjectParameter("ren", ren) :
+                new ObjectParameter("ren", typeof(string));
+    
+            var nuParameter = nu != null ?
+                new ObjectParameter("nu", nu) :
+                new ObjectParameter("nu", typeof(string));
+    
+            var nkParameter = nk != null ?
+                new ObjectParameter("nk", nk) :
+                new ObjectParameter("nk", typeof(string));
+    
+            var fcnParameter = fcn.HasValue ?
+                new ObjectParameter("fcn", fcn) :
+                new ObjectParameter("fcn", typeof(System.DateTime));
+    
+            var gnrParameter = gnr != null ?
+                new ObjectParameter("gnr", gnr) :
+                new ObjectParameter("gnr", typeof(string));
+    
+            var emalParameter = emal != null ?
+                new ObjectParameter("emal", emal) :
+                new ObjectParameter("emal", typeof(string));
+    
+            var drcParameter = drc != null ?
+                new ObjectParameter("Drc", drc) :
+                new ObjectParameter("Drc", typeof(string));
+    
+            var telfParameter = telf != null ?
+                new ObjectParameter("Telf", telf) :
+                new ObjectParameter("Telf", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUsuario", renParameter, nuParameter, nkParameter, fcnParameter, gnrParameter, emalParameter, drcParameter, telfParameter);
+        }
+    
+        public virtual int Final(string descr, string nameus, Nullable<decimal> mot, Nullable<int> isd)
+        {
+            var descrParameter = descr != null ?
+                new ObjectParameter("descr", descr) :
+                new ObjectParameter("descr", typeof(string));
+    
+            var nameusParameter = nameus != null ?
+                new ObjectParameter("nameus", nameus) :
+                new ObjectParameter("nameus", typeof(string));
+    
+            var motParameter = mot.HasValue ?
+                new ObjectParameter("mot", mot) :
+                new ObjectParameter("mot", typeof(decimal));
+    
+            var isdParameter = isd.HasValue ?
+                new ObjectParameter("isd", isd) :
+                new ObjectParameter("isd", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Final", descrParameter, nameusParameter, motParameter, isdParameter);
+        }
+    
+        public virtual ObjectResult<string> agrp(Nullable<int> idva)
+        {
+            var idvaParameter = idva.HasValue ?
+                new ObjectParameter("idva", idva) :
+                new ObjectParameter("idva", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("agrp", idvaParameter);
+        }
+    
+        public virtual int facturar(string desc, Nullable<System.DateTime> f, string ctn, Nullable<decimal> mT, Nullable<int> idcpr)
+        {
+            var descParameter = desc != null ?
+                new ObjectParameter("desc", desc) :
+                new ObjectParameter("desc", typeof(string));
+    
+            var fParameter = f.HasValue ?
+                new ObjectParameter("f", f) :
+                new ObjectParameter("f", typeof(System.DateTime));
+    
+            var ctnParameter = ctn != null ?
+                new ObjectParameter("ctn", ctn) :
+                new ObjectParameter("ctn", typeof(string));
+    
+            var mTParameter = mT.HasValue ?
+                new ObjectParameter("MT", mT) :
+                new ObjectParameter("MT", typeof(decimal));
+    
+            var idcprParameter = idcpr.HasValue ?
+                new ObjectParameter("idcpr", idcpr) :
+                new ObjectParameter("idcpr", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("facturar", descParameter, fParameter, ctnParameter, mTParameter, idcprParameter);
+        }
+    
+        public virtual int miCarroalcomprar(Nullable<int> isd, string npt)
+        {
+            var isdParameter = isd.HasValue ?
+                new ObjectParameter("isd", isd) :
+                new ObjectParameter("isd", typeof(int));
+    
+            var nptParameter = npt != null ?
+                new ObjectParameter("npt", npt) :
+                new ObjectParameter("npt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("miCarroalcomprar", isdParameter, nptParameter);
+        }
+    
+        public virtual ObjectResult<facpdf_Result> facpdf(Nullable<int> di)
+        {
+            var diParameter = di.HasValue ?
+                new ObjectParameter("di", di) :
+                new ObjectParameter("di", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<facpdf_Result>("facpdf", diParameter);
         }
     }
 }

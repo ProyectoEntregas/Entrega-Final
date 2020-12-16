@@ -8,6 +8,7 @@ using Shop_ETC.Controllers;
 using System.Data;
 using System.Data.Entity;
 using System.Net;
+using Rotativa.MVC;
 
 namespace Shop_ETC.Controllers
 {
@@ -346,10 +347,19 @@ namespace Shop_ETC.Controllers
             return RedirectToAction("CarritoCliente", "Home");
 
         }
-        public ActionResult FinalCliente()
+        public ActionResult FinalCliente(decimal? monto)
         {
-            return Content("Su Compra Se Realizo Correctamente");
+            ViewBag.Nombre = Session["user"];
+            ob.Nombre = Session["user"].ToString();
+            ob.var1 = (from h in db.Usuario
+                       where h.Nickusuario == ob.Nombre.Trim()
+                       select h.Idusuario).FirstOrDefault();
+            ViewBag.Monto = monto;
+            var Precompra = db.detalleCarrito(ob.var1);
+            return View(Precompra.ToList());
+
         }
+        
         public ActionResult Regist(string nombre, string nombreUser, string fecha, string sexo, string correo, string dirreccion, string telefono, string contra)
         {
 
@@ -468,6 +478,73 @@ namespace Shop_ETC.Controllers
 
 
         }
-       
+       public ActionResult ModificarCliente()
+        {
+            ViewBag.Nombre = Session["user"];
+            ob.seleccion = Session["user"].ToString();
+            ViewBag.Nombre = Session["user"];
+            if (ob.seleccion == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.Repues = TempData["Respuesta"];
+            var perf = db.Perfil(ob.seleccion);
+            return View(perf.ToList());
+        }
+        public ActionResult PerfilModificar(string nombre, string nombreUser, string fecha, string sexo, string correo, string dirreccion, string telefono, string contra)
+        {
+
+            ob.Nombre = (from d in db.Usuario
+                         where d.Nickusuario == nombreUser.Trim()
+                         select d.Nickusuario).FirstOrDefault();
+            ob.seleccion = Session["user"].ToString();
+            if (nombreUser == ob.Nombre && nombreUser != ob.seleccion)
+            {
+                TempData["Respuesta"] = "No se puede Registrar con este Usuario, Ya existe, Intente Con otro Usuario";
+
+                return RedirectToAction("ValidarRegistro", "Home");
+            }
+
+            db.UpdateUsuario(ob.seleccion, nombre, nombreUser, Convert.ToDateTime(fecha.ToString()), sexo, correo, dirreccion, telefono);
+
+
+            return RedirectToAction("PerfilCliente", "Home");
+
+        }
+        public ActionResult facturar(string nom, int cant, double pr, decimal tl)
+        {
+            DateTime fech;
+            ViewBag.Nombre = Session["user"];
+            ob.Nombre = Session["user"].ToString();
+            ob.var1 = (from h in db.Usuario
+                       where h.Nickusuario == ob.Nombre.Trim()
+                       select h.Idusuario).FirstOrDefault();
+            fech = DateTime.Now;
+            db.facturar(nom, fech, "Procesando", tl, ob.var1);
+            db.miCarroalcomprar(ob.var1, nom);
+            return RedirectToAction("FinalCliente", "Home");
+
+        }
+
+        public ActionResult Imprimir()
+        {
+            decimal? v;
+            ViewBag.Nombre = Session["user"];
+            ob.Nombre = Session["user"].ToString();
+            ob.var1 = (from h in db.Usuario
+                       where h.Nickusuario == ob.Nombre.Trim()
+                       select h.Idusuario).FirstOrDefault();
+            var facpd= db.facpdf(ob.var1);
+            v = (from gh in db.VentasRealizadas
+                where gh.idcomprador == ob.var1
+                 select gh.MontoTotal).Sum();
+            ViewBag.toalpaga = v;
+            return View(facpd.ToList());
+        }
+        public ActionResult PDF()
+        {
+            var prt =new ActionAsPdf("Imprimir");
+            return prt;
+        }
     }
 }

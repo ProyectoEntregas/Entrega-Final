@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Shop_ETC.Models.Perfil_Result>
+@{
+    ViewBag.Title = "ModificarCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Perfil Cliente  ViewBag.Nombre</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .conteent {
+        margin-top: 2em;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+
+    .form-box {
+        width: 40%;
+        padding: 20px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
+        margin-top: 1em;
+    }
+
+        .form-box input {
+            padding: 10px 0;
+            margin-bottom: 30px;
+            width: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #000;
+            padding: 5px 5px;
+            padding-bottom: -5px;
+            padding-top: 20px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+            .form-box input[type="submit"] {
+                border-bottom: 3px solid rgb(102, 157, 219);
+                border-radius: 25px;
+                width: 200px;
+                background: rgb(102, 157, 219);
+                cursor: pointer;
+            }
+
+        .form-box form div {
+            position: relative;
+        }
+
+            .form-box form div label {
+                position: absolute;
+                top: 10px;
+                left: 5px;
+                pointer-events: none;
+                transition: 0.5s;
+                font-size: 17px;
+                color: rgb(78, 78, 86);
+            }
+
+        .form-box input:focus ~ label,
+        .form-box input:valid ~ label {
+            top: 0.12px;
+            color: rgb(102, 157, 219);
+            font-weight: bold;
+        }
+
+        .form-box input:focus,
+        .form-box input:valid {
+            border-bottom: 2px solid rgb(102, 157, 219);
+        }
+</style>
+<body>
+
+    <div>
+        @foreach (var item in Model)
+        {
+            
+                <div class="conteent" >
+                    <h2>Actualize su Perfil</h2><br />
+                    @ViewBag.Repues
+                    <div class="form-box">
+                        <header>
+                            <img src="data:image/png;base64,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" />
+                        </header>
+                        <form action="@Url.Content("~/Home/PerfilModificar")" method="post">
+                            <div class="div">
+                                <input type="text" name="nombre" value="@Html.DisplayFor(modelItem => item.NombresUsuario)">
+                                <label for="">Nombre completo</label>
+                            </div>
+                            <div class="div">
+                                <input type="text" name="nombreUser" value="@Html.DisplayFor(modelItem => item.Nickusuario)" >
+                                <label for="">Nombre de usuario</label>
+                            </div>
+                            <div class="div">
+                                <input type="date" name="fecha" value="@Html.DisplayFor(modelItem => item.Fecha_nacimiento)">
+                                <label for="">Fecha de nacimiento</label>
+                            </div>
+                            <div style="text-align:center;">
+                                <span style="font-size:18px; color:#000;">Seleccione su genero:</span>
+                                <select name="sexo" required style="border-radius: 26px; border: 1px solid rgb(102, 157, 219); padding:3px 7px; font-size:18px; outline:none;">
+                                    <option value="">@Html.DisplayFor(modelItem => item.Genero)</option>
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </div>
+                            <div class="div">
+                                <input type="email" name="correo" value="@Html.DisplayFor(modelItem => item.email)">
+                                <label for="">Correro</label>
+                            </div>
+                            <div class="div">
+                                <input type="text" name="dirreccion" value="@Html.DisplayFor(modelItem => item.Direccion)">
+                                <label for="">Direccion</label>
+                            </div>
+                            <div class="div">
+                                <input type="text" name="telefono" value="@Html.DisplayFor(modelItem => item.Telefono)">
+                                <label for="">Telefono</label>
+                            </div>
+                            <div class="">
+                                <input type="submit" value="Guardar" class="btn btn-success">
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Cancelar", "PerfilCliente")
+                    </div>
+                </div>
+        }
+    </div>
+
+
+    <br />
+    <br />
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+

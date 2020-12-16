@@ -82,7 +82,7 @@
                                 @Html.DisplayFor(modelItem => item.Monto)
                             </td>
                             <td>
-                                @Html.ActionLink("Finalizar Compra", "FinalCliente") |
+                                @Html.ActionLink("Finalizar Compra", "FinalCliente", new { monto=item.Monto }) |
                             </td>
                         </tr>
                     }

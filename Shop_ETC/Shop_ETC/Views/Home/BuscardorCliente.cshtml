@@ -5,6 +5,12 @@
 }
 
 <div style="text-align:center;">
+    <form action="@Url.Content("~/Home/BuscardorCliente")" method="post">
+        <input type="search" placeholder="Buscar" name="Bus" />
+        <input type="submit" class="btn btn-success" value="Buscar" />
+    </form>
+</div>
+<div style="text-align:center;">
     <h3><i>Busqueda</i></h3>
 </div>
 <div style="background:#c8c5c5">
@@ -32,7 +38,7 @@
                     @foreach (var item in Model)
                     {
                         
-                            <div class="products-item" category="ordenadores">
+                            <div class="products-item" category="Todo">
                                 <img Height="167" src="~/IMG/@Html.DisplayFor(modelItem => item.Imagen)" BorderStyle="Dotted" Width="240px" />
                                 <a href="">
                                     @Html.DisplayFor(modelItem => item.NombreProducto)<br />

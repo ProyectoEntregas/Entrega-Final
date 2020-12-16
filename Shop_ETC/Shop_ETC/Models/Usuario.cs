@@ -19,6 +19,7 @@ namespace Shop_ETC.Models
         {
             this.Compras = new HashSet<Compras>();
             this.Ventas = new HashSet<Ventas>();
+            this.VentasRealizadas = new HashSet<VentasRealizadas>();
         }
     
         public int Idusuario { get; set; }
@@ -37,5 +38,7 @@ namespace Shop_ETC.Models
         public virtual TipoUsuario TipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ventas> Ventas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VentasRealizadas> VentasRealizadas { get; set; }
     }
 }

@@ -24,6 +24,8 @@
         <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idprovee__21B6055D" ManuallyRouted="false" />
         <AssociationConnector Association="SITIOWEBModel.fk_idTipo" ManuallyRouted="false" />
         <AssociationConnector Association="SITIOWEBModel.FK__Ventas__Idusuari__1ED998B2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SITIOWEBModel.VentasRealizadas" Width="1.5" PointX="3" PointY="13.625" />
+        <AssociationConnector Association="SITIOWEBModel.fk_idcomprador" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

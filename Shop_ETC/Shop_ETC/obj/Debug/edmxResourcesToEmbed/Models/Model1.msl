@@ -215,5 +215,31 @@
     <FunctionImportMapping FunctionImportName="Registrar" FunctionName="SITIOWEBModel.Store.Registrar" />
     <FunctionImportMapping FunctionImportName="EditarActualizarStocksuma" FunctionName="SITIOWEBModel.Store.EditarActualizarStocksuma" />
     <FunctionImportMapping FunctionImportName="RegistrarNew" FunctionName="SITIOWEBModel.Store.RegistrarNew" />
+    <FunctionImportMapping FunctionImportName="UpdateUsuario" FunctionName="SITIOWEBModel.Store.UpdateUsuario" />
+    <EntitySetMapping Name="VentasRealizadas">
+      <EntityTypeMapping TypeName="SITIOWEBModel.VentasRealizadas">
+        <MappingFragment StoreEntitySet="VentasRealizadas">
+          <ScalarProperty Name="idcomprador" ColumnName="idcomprador" />
+          <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="facturar" FunctionName="SITIOWEBModel.Store.facturar" />
+    <FunctionImportMapping FunctionImportName="miCarroalcomprar" FunctionName="SITIOWEBModel.Store.miCarroalcomprar" />
+    <FunctionImportMapping FunctionImportName="facpdf" FunctionName="SITIOWEBModel.Store.facpdf">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SITIOWEBModel.facpdf_Result">
+          <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

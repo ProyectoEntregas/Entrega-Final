@@ -114,6 +114,19 @@
           <Property Name="Total" Type="smallmoney" />
           <Property Name="Fecha_pago" Type="date" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VentasRealizadas">
+          <Key>
+            <PropertyRef Name="idVenta" />
+          </Key>
+          <Property Name="idVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="MontoTotal" Type="money" />
+          <Property Name="idcomprador" Type="int" />
+        </EntityType>
         <Association Name="FK__Compras__Idprove__286302EC">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
           <End Role="Compras" Type="Self.Compras" Multiplicity="*" />
@@ -210,6 +223,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_idcomprador">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="VentasRealizadas" Type="Self.VentasRealizadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Idusuario" />
+            </Principal>
+            <Dependent Role="VentasRealizadas">
+              <PropertyRef Name="idcomprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_idTipo">
           <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -254,9 +279,23 @@
           <Parameter Name="u" Type="varchar" Mode="In" />
           <Parameter Name="cant" Type="int" Mode="In" />
         </Function>
+        <Function Name="facpdf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="di" Type="int" Mode="In" />
+        </Function>
+        <Function Name="facturar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="desc" Type="varchar" Mode="In" />
+          <Parameter Name="f" Type="datetime" Mode="In" />
+          <Parameter Name="ctn" Type="varchar" Mode="In" />
+          <Parameter Name="MT" Type="money" Mode="In" />
+          <Parameter Name="idcpr" Type="int" Mode="In" />
+        </Function>
         <Function Name="inicioSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nom_user" Type="nvarchar" Mode="In" />
           <Parameter Name="pass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="miCarroalcomprar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isd" Type="int" Mode="In" />
+          <Parameter Name="npt" Type="varchar" Mode="In" />
         </Function>
         <Function Name="MontoTotalPagar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUs" Type="int" Mode="In" />
@@ -292,6 +331,16 @@
         <Function Name="selecciondeProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ren" Type="varchar" Mode="In" />
+          <Parameter Name="nu" Type="varchar" Mode="In" />
+          <Parameter Name="nk" Type="varchar" Mode="In" />
+          <Parameter Name="fcn" Type="date" Mode="In" />
+          <Parameter Name="gnr" Type="char" Mode="In" />
+          <Parameter Name="emal" Type="varchar" Mode="In" />
+          <Parameter Name="Drc" Type="varchar" Mode="In" />
+          <Parameter Name="Telf" Type="nchar" Mode="In" />
+        </Function>
         <Function Name="UpVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nom" Type="varchar" Mode="In" />
           <Parameter Name="cant" Type="int" Mode="In" />
@@ -310,6 +359,16 @@
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VentasRealizadas" EntityType="Self.VentasRealizadas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VentasRealizadas].[idVenta] AS [idVenta], 
+    [VentasRealizadas].[Descripcion] AS [Descripcion], 
+    [VentasRealizadas].[Fecha] AS [Fecha], 
+    [VentasRealizadas].[Estado] AS [Estado], 
+    [VentasRealizadas].[MontoTotal] AS [MontoTotal], 
+    [VentasRealizadas].[idcomprador] AS [idcomprador]
+    FROM [dbo].[VentasRealizadas] AS [VentasRealizadas]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Compras__Idprove__286302EC" Association="Self.FK__Compras__Idprove__286302EC">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="Compras" EntitySet="Compras" />
@@ -341,6 +400,10 @@
           <AssociationSet Name="FK__Ventas__Idusuari__1ED998B2" Association="Self.FK__Ventas__Idusuari__1ED998B2">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_idcomprador" Association="Self.fk_idcomprador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentasRealizadas" EntitySet="VentasRealizadas" />
           </AssociationSet>
           <AssociationSet Name="fk_idTipo" Association="Self.fk_idTipo">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -458,6 +521,7 @@
           <NavigationProperty Name="Compras" Relationship="Self.FK__Compras__Idusuar__276EDEB3" FromRole="Usuario" ToRole="Compras" />
           <NavigationProperty Name="TipoUsuario" Relationship="Self.fk_idTipo" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ventas" Relationship="Self.FK__Ventas__Idusuari__1ED998B2" FromRole="Usuario" ToRole="Ventas" />
+          <NavigationProperty Name="VentasRealizadas" Relationship="SITIOWEBModel.fk_idcomprador" FromRole="Usuario" ToRole="VentasRealizadas" />
         </EntityType>
         <EntityType Name="Ventas">
           <Key>
@@ -722,6 +786,44 @@
             <Parameter Name="c" Mode="In" Type="String" />
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UpdateUsuario">
+            <Parameter Name="ren" Mode="In" Type="String" />
+            <Parameter Name="nu" Mode="In" Type="String" />
+            <Parameter Name="nk" Mode="In" Type="String" />
+            <Parameter Name="fcn" Mode="In" Type="DateTime" />
+            <Parameter Name="gnr" Mode="In" Type="String" />
+            <Parameter Name="emal" Mode="In" Type="String" />
+            <Parameter Name="Drc" Mode="In" Type="String" />
+            <Parameter Name="Telf" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Final">
+            <Parameter Name="descr" Mode="In" Type="String" />
+            <Parameter Name="nameus" Mode="In" Type="String" />
+            <Parameter Name="mot" Mode="In" Type="Decimal" />
+            <Parameter Name="isd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="agrp" ReturnType="Collection(String)">
+            <Parameter Name="idva" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="VentasRealizadas" EntityType="SITIOWEBModel.VentasRealizadas" />
+          <AssociationSet Name="fk_idcomprador" Association="SITIOWEBModel.fk_idcomprador">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VentasRealizadas" EntitySet="VentasRealizadas" />
+          </AssociationSet>
+          <FunctionImport Name="facturar">
+            <Parameter Name="desc" Mode="In" Type="String" />
+            <Parameter Name="f" Mode="In" Type="DateTime" />
+            <Parameter Name="ctn" Mode="In" Type="String" />
+            <Parameter Name="MT" Mode="In" Type="Decimal" />
+            <Parameter Name="idcpr" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="miCarroalcomprar">
+            <Parameter Name="isd" Mode="In" Type="Int32" />
+            <Parameter Name="npt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="facpdf" ReturnType="Collection(SITIOWEBModel.facpdf_Result)">
+          <Parameter Name="di" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Carrito_Result">
           <Property Type="String" Name="Nickusuario" Nullable="true" MaxLength="200" />
@@ -796,6 +898,37 @@
           <Property Type="String" Name="email" Nullable="true" MaxLength="75" />
           <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+        </ComplexType>
+        <EntityType Name="VentasRealizadas">
+          <Key>
+            <PropertyRef Name="idVenta" />
+          </Key>
+          <Property Name="idVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MontoTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="idcomprador" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="SITIOWEBModel.fk_idcomprador" FromRole="VentasRealizadas" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="fk_idcomprador">
+          <End Type="SITIOWEBModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="SITIOWEBModel.VentasRealizadas" Role="VentasRealizadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Idusuario" />
+            </Principal>
+            <Dependent Role="VentasRealizadas">
+              <PropertyRef Name="idcomprador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="facpdf_Result">
+          <Property Type="Int32" Name="idVenta" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="MontoTotal" Nullable="true" Precision="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1017,6 +1150,32 @@
           <FunctionImportMapping FunctionImportName="Registrar" FunctionName="SITIOWEBModel.Store.Registrar" />
           <FunctionImportMapping FunctionImportName="EditarActualizarStocksuma" FunctionName="SITIOWEBModel.Store.EditarActualizarStocksuma" />
           <FunctionImportMapping FunctionImportName="RegistrarNew" FunctionName="SITIOWEBModel.Store.RegistrarNew" />
+          <FunctionImportMapping FunctionImportName="UpdateUsuario" FunctionName="SITIOWEBModel.Store.UpdateUsuario" />
+          <EntitySetMapping Name="VentasRealizadas">
+            <EntityTypeMapping TypeName="SITIOWEBModel.VentasRealizadas">
+              <MappingFragment StoreEntitySet="VentasRealizadas">
+                <ScalarProperty Name="idcomprador" ColumnName="idcomprador" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="facturar" FunctionName="SITIOWEBModel.Store.facturar" />
+          <FunctionImportMapping FunctionImportName="miCarroalcomprar" FunctionName="SITIOWEBModel.Store.miCarroalcomprar" />
+          <FunctionImportMapping FunctionImportName="facpdf" FunctionName="SITIOWEBModel.Store.facpdf">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SITIOWEBModel.facpdf_Result">
+                <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
