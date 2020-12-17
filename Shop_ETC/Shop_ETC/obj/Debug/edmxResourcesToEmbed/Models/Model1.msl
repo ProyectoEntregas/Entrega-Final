@@ -241,5 +241,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateVenta" FunctionName="SITIOWEBModel.Store.UpdateVenta" />
+    <FunctionImportMapping FunctionImportName="UpdateVentaM" FunctionName="SITIOWEBModel.Store.UpdateVentaM" />
+    <FunctionImportMapping FunctionImportName="UpdateVentaTotal" FunctionName="SITIOWEBModel.Store.UpdateVentaTotal" />
+    <FunctionImportMapping FunctionImportName="BorrarVenta" FunctionName="SITIOWEBModel.Store.BorrarVenta" />
   </EntityContainerMapping>
 </Mapping>

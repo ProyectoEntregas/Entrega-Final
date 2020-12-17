@@ -254,6 +254,9 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
         <Function Name="ActualizarStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="numer" Type="int" Mode="In" />
         </Function>
+        <Function Name="BorrarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
         <Function Name="Buscador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BusPro" Type="varchar" Mode="In" />
           <Parameter Name="BusCat" Type="varchar" Mode="In" />
@@ -340,6 +343,22 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
           <Parameter Name="emal" Type="varchar" Mode="In" />
           <Parameter Name="Drc" Type="varchar" Mode="In" />
           <Parameter Name="Telf" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="esta" Type="varchar" Mode="In" />
+          <Parameter Name="idVent" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateVentaM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="est" Type="varchar" Mode="In" />
+          <Parameter Name="idVen" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateVentaTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="esta" Type="varchar" Mode="In" />
+          <Parameter Name="Monto" Type="money" Mode="In" />
+          <Parameter Name="fech" Type="datetime" Mode="In" />
+          <Parameter Name="cpid" Type="int" Mode="In" />
+          <Parameter Name="idVent" Type="int" Mode="In" />
         </Function>
         <Function Name="UpVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nom" Type="varchar" Mode="In" />
@@ -824,6 +843,25 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
           <FunctionImport Name="facpdf" ReturnType="Collection(SITIOWEBModel.facpdf_Result)">
           <Parameter Name="di" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UpdateVenta">
+            <Parameter Name="esta" Mode="In" Type="String" />
+            <Parameter Name="idVent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateVentaM">
+            <Parameter Name="est" Mode="In" Type="String" />
+            <Parameter Name="idVen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateVentaTotal">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="esta" Mode="In" Type="String" />
+            <Parameter Name="Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="fech" Mode="In" Type="DateTime" />
+            <Parameter Name="cpid" Mode="In" Type="Int32" />
+            <Parameter Name="idVent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BorrarVenta">
+            <Parameter Name="i" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Carrito_Result">
           <Property Type="String" Name="Nickusuario" Nullable="true" MaxLength="200" />
@@ -1176,6 +1214,10 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateVenta" FunctionName="SITIOWEBModel.Store.UpdateVenta" />
+          <FunctionImportMapping FunctionImportName="UpdateVentaM" FunctionName="SITIOWEBModel.Store.UpdateVentaM" />
+          <FunctionImportMapping FunctionImportName="UpdateVentaTotal" FunctionName="SITIOWEBModel.Store.UpdateVentaTotal" />
+          <FunctionImportMapping FunctionImportName="BorrarVenta" FunctionName="SITIOWEBModel.Store.BorrarVenta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

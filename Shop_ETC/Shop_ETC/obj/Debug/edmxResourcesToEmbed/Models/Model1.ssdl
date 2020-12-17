@@ -249,6 +249,9 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
   <Function Name="ActualizarStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="numer" Type="int" Mode="In" />
   </Function>
+  <Function Name="BorrarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i" Type="int" Mode="In" />
+  </Function>
   <Function Name="Buscador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BusPro" Type="varchar" Mode="In" />
     <Parameter Name="BusCat" Type="varchar" Mode="In" />
@@ -335,6 +338,22 @@ advertencia 6002: La tabla o vista 'SITIOWEB.dbo.VentasRealizadas' no tiene defi
     <Parameter Name="emal" Type="varchar" Mode="In" />
     <Parameter Name="Drc" Type="varchar" Mode="In" />
     <Parameter Name="Telf" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="esta" Type="varchar" Mode="In" />
+    <Parameter Name="idVent" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateVentaM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="est" Type="varchar" Mode="In" />
+    <Parameter Name="idVen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateVentaTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="esta" Type="varchar" Mode="In" />
+    <Parameter Name="Monto" Type="money" Mode="In" />
+    <Parameter Name="fech" Type="datetime" Mode="In" />
+    <Parameter Name="cpid" Type="int" Mode="In" />
+    <Parameter Name="idVent" Type="int" Mode="In" />
   </Function>
   <Function Name="UpVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="nom" Type="varchar" Mode="In" />

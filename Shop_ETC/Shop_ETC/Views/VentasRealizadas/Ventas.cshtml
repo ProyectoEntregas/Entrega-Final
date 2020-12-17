@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Shop_ETC.Models.VentasRealizadas>
+@{
+    ViewBag.Title = "Ventas";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<h2>Ventas</h2>
+<table class="table table-danger">
+    <tr>
+        <td>idVenta</td>
+
+        <td>Descripcion</td>
+
+        <td>Estado</td>
+
+        <td>Monto Total</td>
+        <td>Fecha de compra</td>
+
+        <td>id comprador</td>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.idVenta)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.MontoTotal)</td>
+            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.idcomprador)</td>
+            <td>@Html.ActionLink("Editar", "Editar", new { id=item.idVenta})|
+                @Html.ActionLink("Borrar", "Borrar", new { id = item.idVenta })
+            </td>
+        </tr>
+    }
+</table>
+

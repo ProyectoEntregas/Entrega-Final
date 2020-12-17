@@ -410,6 +410,25 @@
     <FunctionImport Name="facpdf" ReturnType="Collection(SITIOWEBModel.facpdf_Result)">
       <Parameter Name="di" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="UpdateVenta">
+      <Parameter Name="esta" Mode="In" Type="String" />
+      <Parameter Name="idVent" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateVentaM">
+      <Parameter Name="est" Mode="In" Type="String" />
+      <Parameter Name="idVen" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateVentaTotal">
+      <Parameter Name="Descripcion" Mode="In" Type="String" />
+      <Parameter Name="esta" Mode="In" Type="String" />
+      <Parameter Name="Monto" Mode="In" Type="Decimal" />
+      <Parameter Name="fech" Mode="In" Type="DateTime" />
+      <Parameter Name="cpid" Mode="In" Type="Int32" />
+      <Parameter Name="idVent" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="BorrarVenta">
+      <Parameter Name="i" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Carrito_Result">
     <Property Type="String" Name="Nickusuario" Nullable="true" MaxLength="200" />

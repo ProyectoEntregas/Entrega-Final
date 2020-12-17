@@ -445,5 +445,69 @@ namespace Shop_ETC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<facpdf_Result>("facpdf", diParameter);
         }
+    
+        public virtual int UpdateVenta(string esta, Nullable<int> idVent)
+        {
+            var estaParameter = esta != null ?
+                new ObjectParameter("esta", esta) :
+                new ObjectParameter("esta", typeof(string));
+    
+            var idVentParameter = idVent.HasValue ?
+                new ObjectParameter("idVent", idVent) :
+                new ObjectParameter("idVent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateVenta", estaParameter, idVentParameter);
+        }
+    
+        public virtual int UpdateVentaM(string est, Nullable<int> idVen)
+        {
+            var estParameter = est != null ?
+                new ObjectParameter("est", est) :
+                new ObjectParameter("est", typeof(string));
+    
+            var idVenParameter = idVen.HasValue ?
+                new ObjectParameter("idVen", idVen) :
+                new ObjectParameter("idVen", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateVentaM", estParameter, idVenParameter);
+        }
+    
+        public virtual int UpdateVentaTotal(string descripcion, string esta, Nullable<decimal> monto, Nullable<System.DateTime> fech, Nullable<int> cpid, Nullable<int> idVent)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estaParameter = esta != null ?
+                new ObjectParameter("esta", esta) :
+                new ObjectParameter("esta", typeof(string));
+    
+            var montoParameter = monto.HasValue ?
+                new ObjectParameter("Monto", monto) :
+                new ObjectParameter("Monto", typeof(decimal));
+    
+            var fechParameter = fech.HasValue ?
+                new ObjectParameter("fech", fech) :
+                new ObjectParameter("fech", typeof(System.DateTime));
+    
+            var cpidParameter = cpid.HasValue ?
+                new ObjectParameter("cpid", cpid) :
+                new ObjectParameter("cpid", typeof(int));
+    
+            var idVentParameter = idVent.HasValue ?
+                new ObjectParameter("idVent", idVent) :
+                new ObjectParameter("idVent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateVentaTotal", descripcionParameter, estaParameter, montoParameter, fechParameter, cpidParameter, idVentParameter);
+        }
+    
+        public virtual int BorrarVenta(Nullable<int> i)
+        {
+            var iParameter = i.HasValue ?
+                new ObjectParameter("i", i) :
+                new ObjectParameter("i", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BorrarVenta", iParameter);
+        }
     }
 }

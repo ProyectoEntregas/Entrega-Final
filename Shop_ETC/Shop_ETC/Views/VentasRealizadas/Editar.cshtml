@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Shop_ETC.Models.VentasRealizadas>
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+<br />
+<br />
+<h2>Editar_Venta (Estado o Monto)</h2>
+<br />
+<div >
+    <div class="form-group" >
+        <form action="@Url.Content("~/VentasRealizadas/Edit")" method="post">
+            @foreach (var item in Model)
+            {
+                
+                    <label>Id</label>
+                    <input readonly type="text" value="@Html.DisplayFor(modelItem => item.idVenta)" name="id"/>
+               
+                <label>Descripción</label>
+                <input readonly type="text" value="@Html.DisplayFor(modelItem => item.Descripcion)" name="txtDesc" />
+              
+                    <label>Estado</label>
+                    <input type="text" value="@Html.DisplayFor(modelItem => item.Estado)" name="txtEstado" />
+                
+                    <label>Monto Total</label>
+                    <input type="text" value="@Html.DisplayFor(modelItem => item.MontoTotal)" name="txtMontoTotal" />
+                
+                <label>Fecha de compra</label>
+                <input readonly type="text" value="@Html.DisplayFor(modelItem => item.Fecha)" name="txtfech"/>
+              
+                    <label>Comprador</label>
+                    <input readonly type="text" value="@Html.DisplayFor(modelItem => item.idcomprador)" name="idc" />
+                
+                <div>
+                    <input type="submit" class="btn btn-success" />
+                </div>
+
+            }
+
+            </form>
+        </div>
+</div>
+

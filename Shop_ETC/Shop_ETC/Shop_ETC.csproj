@@ -419,11 +419,10 @@
     <Content Include="Views\Home\Imprimir.cshtml" />
     <Content Include="Views\Home\PDF.cshtml" />
     <Content Include="Views\Shared\_LayoutPage2.cshtml" />
-    <Content Include="Views\VentasRealizadas\Create.cshtml" />
-    <Content Include="Views\VentasRealizadas\Delete.cshtml" />
-    <Content Include="Views\VentasRealizadas\Details.cshtml" />
+    <Content Include="Views\VentasRealizadas\Ventas.cshtml" />
+    <Content Include="Views\VentasRealizadas\Editar.cshtml" />
     <Content Include="Views\VentasRealizadas\Edit.cshtml" />
-    <Content Include="Views\VentasRealizadas\Index.cshtml" />
+    <Content Include="Views\VentasRealizadas\Borrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

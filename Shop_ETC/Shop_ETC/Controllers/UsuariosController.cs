@@ -113,6 +113,7 @@ namespace Shop_ETC.Controllers
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,10 +131,17 @@ namespace Shop_ETC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("User");
+            try {
+                Usuario usuario = db.Usuario.Find(id);
+                db.Usuario.Remove(usuario);
+                db.SaveChanges();
+                return RedirectToAction("User");
+            }
+            catch(Exception ex)
+            {
+                return Content("El usuario posee dependencias en la base borre primero las dependecias" + ex.Message);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

@@ -112,20 +112,19 @@
             <div>
                 <div class="baddy">
                     <div class="wrap">
-                        <i>  <h1 style="font-family: 'Roboto', sans-serif;color:#494B4D; font-weight:400;  display:flex;  flex-direction:column;   text-align:center; margin:15px 0px;">Escoge un producto</h1></i><br />
-                        <hr />
+                        <h1 style="color:#494B4D; font-weight:400;  display:flex;  flex-direction:column;   text-align:center; margin:15px 0px;">Escoge un producto</h1>
                         <div class="store-wrapper" style="display:flex;">
                             <div class="dropdown">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Filtrar
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" width="150px">
-                                    <div class="category_list"  ">
+                                    <div class="category_list" style="display:flex;  flex-direction:column; ">
                                         <a href="#" class="category_item" category="all">Todo</a>
                                         <a href="#" class="category_item" category="ordenadores">Ordenadores</a>
-                                        <a href="#" class="category_item" category="laptops">Laptops</a>
-                                        <a href="#" class="category_item" category="smartphones">SmartPhones</a>
-                                        <a href="#" class="category_item" category="monitores">Monitores</a>
+                                        <a href="#" class="category_item" category="Hogar">Hogar</a>
+                                        <a href="#" class="category_item" category="Cocina">Cocina</a>
+                                        <a href="#" class="category_item" category="Entretenimiento">Entretenimiento</a>
                                         <a href="#" class="category_item" category="Sonido">Sonido</a>
                                     </div>
                                 </div>
@@ -135,7 +134,7 @@
                                 {
                                     if (item.Idcategoria == 1)
                                     {
-                                        <div class="products-item" category="laptops">
+                                        <div class="products-item" category="ordenadores">
                                             <img Height="167" src="~/IMG/@Html.DisplayFor(modelItem => item.Imagen)" BorderStyle="Dotted" Width="240px" />
                                             <a href="">
                                                 @Html.DisplayFor(modelItem => item.NombreProducto)<br />
@@ -143,8 +142,8 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)<br />
                                                 @Html.DisplayFor(modelItem => item.Cantidad)<br />
                                             </a>
-                                            <a href="" class="bt-home" id="activarRegistro"><i aria-hidden="true">Comprar</i></a>
-                                            </div>
+                                            <input onclick="document.location.href='@Url.Content("~/Home/CarritoCliente/"+ item.Idproducto )'" type="button" class="btn btn-outline-primary" value="Agregar a carrito" />
+                                        </div>
                                     }
                                     else if (item.Idcategoria == 2)
                                     {
@@ -156,8 +155,8 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)<br />
                                                 @Html.DisplayFor(modelItem => item.Cantidad)<br />
                                             </a>
-                                            <a href="" class="bt-home" id="activarRegistro"><i aria-hidden="true">Comprar</i></a>
-                                             </div>
+                                            <input onclick="document.location.href='@Url.Content("~/Home/CarritoCliente/"+ item.Idproducto )'" type="button" class="btn btn-outline-primary" value="Agregar a carrito" />
+                                        </div>
                                     }
                                     else if (item.Idcategoria == 3)
                                     {
@@ -169,8 +168,8 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)<br />
                                                 @Html.DisplayFor(modelItem => item.Cantidad)<br />
                                             </a>
-                                            <a href="" class="bt-home" id="activarRegistro"><i aria-hidden="true">Comprar</i></a>
-                                           </div>
+                                            <input onclick="document.location.href='@Url.Content("~/Home/CarritoCliente/"+ item.Idproducto )'" type="button" class="btn btn-outline-primary" value="Agregar a carrito" />
+                                        </div>
                                     }
                                     else if (item.Idcategoria == 4)
                                     {
@@ -182,8 +181,8 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)<br />
                                                 @Html.DisplayFor(modelItem => item.Cantidad)<br />
                                             </a>
-                                            <a href="" class="bt-home" id="activarRegistro"><i aria-hidden="true">Comprar</i></a>
-                                          </div>
+                                            <input onclick="document.location.href='@Url.Content("~/Home/CarritoCliente/"+ item.Idproducto )'" type="button" class="btn btn-outline-primary" value="Agregar a carrito" />
+                                        </div>
                                     }
                                     else if (item.Idcategoria == 5)
                                     {
@@ -195,10 +194,9 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)<br />
                                                 @Html.DisplayFor(modelItem => item.Cantidad)<br />
                                             </a>
-                                            <a href="" class="bt-home" id="activarRegistro"><i aria-hidden="true">Comprar</i></a>
-                                          </div>
+                                            <input onclick="document.location.href='@Url.Content("~/Home/CarritoCliente/"+ item.Idproducto )'" type="button" class="btn btn-outline-primary" value="Agregar a carrito" />
+                                        </div>
                                     }
-
 
 
 
@@ -208,7 +206,7 @@
 
                         </div>
                     </div>
-                </div>  <br />
+                </div> <br />
             </div>
         @*Fin de Div de Lista de Productos*@
             <div align="center" class="login" id="login">
